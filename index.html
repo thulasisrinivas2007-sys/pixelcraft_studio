@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelCraft Studio | Creative Digital Portfolio</title>
+  <meta name="description" content="PixelCraft Studio is an award-winning creative agency specializing in Web Development, UI/UX Design, and Brand Strategy. We Build Digital Experiences.">
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS: Local bundle with CDN fallback -->
+  <script src="tailwind.min.js"></script>
+  <script>
+    if (typeof tailwind === 'undefined') {
+      const cdnScript = document.createElement('script');
+      cdnScript.src = 'https://cdn.tailwindcss.com';
+      document.head.appendChild(cdnScript);
+    }
+  </script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+              cyan: '#06b6d4',
+              violet: '#8b5cf6',
+              accent: '#ec4899',
+            },
+            dark: {
+              bg: '#090d16',
+              surface: '#0f172a',
+              card: '#131d35',
+              border: 'rgba(255, 255, 255, 0.08)',
+            }
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+            'float': 'float 4s ease-in-out infinite',
+            'fade-in': 'fadeIn 0.3s ease-out forwards',
+            'toast-in': 'toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'toast-out': 'toastOut 0.25s ease-in forwards',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -40px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.95)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            toastIn: {
+              '0%': { opacity: '0', transform: 'translateY(-20px) scale(0.95)' },
+              '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+            },
+            toastOut: {
+              '0%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+              '100%': { opacity: '0', transform: 'translateY(-15px) scale(0.95)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* Custom Scrollbar & Utility styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d16;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #232d4b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #374775;
+    }
+    .glass-card {
+      background: rgba(19, 29, 53, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-nav {
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 20%, #a5b4fc 60%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-accent {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    }
+    .glow-effect {
+      box-shadow: 0 0 40px -10px rgba(99, 102, 241, 0.35);
+    }
+    .glow-card:hover {
+      box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-[#090d16] text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col relative overflow-x-hidden">
+
+  <!-- Ambient Glow Background Blobs -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-40 left-1/4 w-96 h-96 bg-brand-600/15 rounded-full blur-3xl animate-blob"></div>
+    <div class="absolute top-1/3 -right-20 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl animate-blob" style="animation-delay: 2s;"></div>
+    <div class="absolute bottom-20 left-10 w-[30rem] h-[30rem] bg-brand-violet/10 rounded-full blur-3xl animate-blob" style="animation-delay: 4s;"></div>
+  </div>
+
+  <!-- ==================== HEADER / NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 glass-nav transition-all duration-300" id="site-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo -->
+        <a href="#hero" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-lg p-1">
+          <div class="w-10 h-10 rounded-xl gradient-accent flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform duration-300">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-display font-bold text-xl tracking-tight text-white group-hover:text-brand-300 transition-colors">
+              PixelCraft<span class="text-brand-400">.</span>
+            </span>
+            <span class="text-[10px] tracking-widest text-slate-400 uppercase font-semibold">Studio</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-1 lg:space-x-2" aria-label="Main Navigation">
+          <a href="#hero" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Home</a>
+          <a href="#services" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Services</a>
+          <a href="#work" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Featured Work</a>
+          <a href="#process" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Process</a>
+          <a href="#contact" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Contact</a>
+        </nav>
+
+        <!-- Right Side: Availability Badge & CTA Button -->
+        <div class="hidden md:flex items-center gap-4">
+          <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Available for Q3/Q4
+          </div>
+          <a href="#contact" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 rounded-xl shadow-lg shadow-brand-500/25 transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-400">
+            Let's Talk
+            <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <div class="flex md:hidden items-center">
+          <button id="mobile-menu-btn" type="button" aria-label="Toggle Navigation Menu" aria-expanded="false" class="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500">
+            <svg id="hamburger-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Slide-Down Menu -->
+    <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-white/5 px-4 pt-3 pb-6 space-y-2">
+      <a href="#hero" class="mobile-link block px-4 py-2.5 text-base font-medium text-slate-200 hover:bg-brand-500/10 hover:text-white rounded-lg transition-colors">Home</a>
+      <a href="#services" class="mobile-link block px-4 py-2.5 text-base font-medium text-slate-200 hover:bg-brand-500/10 hover:text-white rounded-lg transition-colors">Services</a>
+      <a href="#work" class="mobile-link block px-4 py-2.5 text-base font-medium text-slate-200 hover:bg-brand-500/10 hover:text-white rounded-lg transition-colors">Featured Work</a>
+      <a href="#process" class="mobile-link block px-4 py-2.5 text-base font-medium text-slate-200 hover:bg-brand-500/10 hover:text-white rounded-lg transition-colors">Process</a>
+      <a href="#contact" class="mobile-link block px-4 py-2.5 text-base font-medium text-slate-200 hover:bg-brand-500/10 hover:text-white rounded-lg transition-colors">Contact</a>
+      <div class="pt-4 border-t border-white/10 flex flex-col gap-3">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium w-fit">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Available for Q3/Q4 Projects
+        </div>
+        <a href="#contact" class="mobile-link w-full text-center py-3 text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-brand-500 rounded-xl shadow-lg shadow-brand-500/25">
+          Start a Project
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow z-10">
+
+    <!-- ==================== 1. HERO SECTION ==================== -->
+    <section id="hero" class="relative pt-16 pb-20 md:pt-28 md:pb-32 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          <!-- Hero Text Content -->
+          <div class="lg:col-span-7 text-center lg:text-left">
+            
+            <!-- Announcement Pill -->
+            <div class="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-brand-300 text-[11px] sm:text-sm font-medium mb-6 hover:bg-white/[0.08] transition-colors cursor-pointer max-w-full">
+              <span class="flex h-2 w-2 rounded-full bg-brand-cyan"></span>
+              <span>Next-Gen Creative Development</span>
+              <span class="text-slate-500 hidden xs:inline">•</span>
+              <span class="text-slate-300">2026 Reel &rarr;</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl xl:text-7xl tracking-tight leading-[1.15] sm:leading-[1.1] text-white mb-6">
+              We Build <br class="hidden sm:inline">
+              <span class="gradient-text">Digital Experiences</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-base sm:text-lg lg:text-xl text-slate-300/90 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8 sm:mb-10">
+              PixelCraft Studio transforms ambitious brands with modern high-performance web applications, intuitive UI/UX design systems, and unforgettable brand positioning.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
+              <a href="#services" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-brand-600 via-brand-500 to-brand-cyan hover:opacity-95 rounded-xl shadow-xl shadow-brand-500/30 transition-all duration-200 transform hover:-translate-y-1 focus:ring-4 focus:ring-brand-500/50">
+                Explore Services
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+              </a>
+              <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-200 bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 rounded-xl transition-all duration-200 hover:text-white">
+                Book Discovery Call
+              </a>
+            </div>
+
+            <!-- Social Proof Metrics Mini -->
+            <div class="pt-8 border-t border-white/10 grid grid-cols-3 gap-2 sm:gap-4 text-left max-w-lg mx-auto lg:mx-0">
+              <div>
+                <div class="font-display font-bold text-xl sm:text-3xl text-white">120+</div>
+                <div class="text-[10px] sm:text-xs text-slate-400 mt-0.5">Projects Shipped</div>
+              </div>
+              <div>
+                <div class="font-display font-bold text-xl sm:text-3xl text-brand-400">99.4%</div>
+                <div class="text-[10px] sm:text-xs text-slate-400 mt-0.5">Client Satisfaction</div>
+              </div>
+              <div>
+                <div class="font-display font-bold text-xl sm:text-3xl text-brand-cyan">14</div>
+                <div class="text-[10px] sm:text-xs text-slate-400 mt-0.5">Design Awards</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hero Visual Showcase / Agency Dashboard Card Mockup -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              
+              <!-- Backdrop Glow -->
+              <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brand-500/30 to-brand-cyan/30 blur-2xl opacity-60"></div>
+
+              <!-- Main Mockup Card -->
+              <div class="relative glass-card rounded-2xl p-6 sm:p-7 shadow-2xl border border-white/15">
+                
+                <!-- Mockup Window Header -->
+                <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+                  <div class="flex items-center space-x-2">
+                    <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                  </div>
+                  <span class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    pixelcraft-core-v3.tsx
+                  </span>
+                  <div class="text-[11px] font-semibold text-brand-300 bg-brand-500/20 px-2 py-0.5 rounded">LIVE</div>
+                </div>
+
+                <!-- Code / Metric Preview Content -->
+                <div class="space-y-4">
+                  <!-- Code snippet -->
+                  <div class="bg-black/40 rounded-xl p-4 font-mono text-xs text-slate-300 border border-white/5 space-y-1 overflow-x-auto">
+                    <div><span class="text-brand-violet">const</span> <span class="text-brand-cyan">studio</span> = <span class="text-brand-400">new</span> <span class="text-amber-300">PixelCraft</span>({</div>
+                    <div class="pl-4">vision: <span class="text-emerald-300">"Digital Excellence"</span>,</div>
+                    <div class="pl-4">stack: [<span class="text-emerald-300">"Modern Web"</span>, <span class="text-emerald-300">"UI/UX"</span>, <span class="text-emerald-300">"Branding"</span>],</div>
+                    <div class="pl-4">performanceScore: <span class="text-brand-400">100</span>,</div>
+                    <div class="pl-4">conversionRate: <span class="text-emerald-400">"+340%"</span></div>
+                    <div>});</div>
+                  </div>
+
+                  <!-- Live Performance Metric Cards -->
+                  <div class="grid grid-cols-2 gap-3 pt-2">
+                    <div class="bg-white/[0.03] p-3.5 rounded-xl border border-white/5">
+                      <div class="text-[11px] text-slate-400 font-medium">Lighthouse Speed</div>
+                      <div class="text-xl font-bold font-display text-emerald-400 mt-1 flex items-center justify-between">
+                        <span>99/100</span>
+                        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="bg-white/[0.03] p-3.5 rounded-xl border border-white/5">
+                      <div class="text-[11px] text-slate-400 font-medium">Design System</div>
+                      <div class="text-xl font-bold font-display text-brand-300 mt-1 flex items-center justify-between">
+                        <span>Figma Ready</span>
+                        <span class="text-xs bg-brand-500/20 px-1.5 py-0.5 rounded text-brand-300">Tokens</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Floating Review Card -->
+                  <div class="flex items-center gap-3 bg-gradient-to-r from-brand-600/20 to-brand-cyan/10 p-3.5 rounded-xl border border-white/10">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-brand-violet to-brand-cyan flex items-center justify-center font-bold text-white text-xs">
+                      EL
+                    </div>
+                    <div class="text-xs">
+                      <p class="font-semibold text-white">Elena Rostova, VP Product</p>
+                      <p class="text-slate-400">"PixelCraft redefined our digital product ecosystem."</p>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Trusted Client Logo Strip -->
+        <div class="mt-20 pt-10 border-t border-white/10 text-center">
+          <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-6">
+            Trusted by founders and design leaders at fast-growing companies
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-14 text-slate-500 font-display font-semibold text-lg">
+            <span class="hover:text-slate-300 transition-colors flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-sm bg-brand-500"></span> NEXUS LABS
+            </span>
+            <span class="hover:text-slate-300 transition-colors flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-cyan"></span> VERTEX AI
+            </span>
+            <span class="hover:text-slate-300 transition-colors flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-sm rotate-45 bg-brand-violet"></span> HYPERION
+            </span>
+            <span class="hover:text-slate-300 transition-colors flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> PULSE CORP
+            </span>
+            <span class="hover:text-slate-300 transition-colors flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-sm bg-pink-500"></span> SYNTHETIX
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==================== 2. SERVICES GRID ==================== -->
+    <section id="services" class="py-20 md:py-28 relative border-t border-white/10 bg-slate-950/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold uppercase tracking-wider mb-4">
+            Our Core Expertise
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight mb-5">
+            Crafted for <span class="gradient-text">Impact & Scale</span>
+          </h2>
+          <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+            We merge design sophistication with engineering excellence to build bespoke digital solutions that drive measurable business outcomes.
+          </p>
+        </div>
+
+        <!-- 3-Column Responsive Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Card 1: Web Development -->
+          <div class="glass-card glow-card rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between group border border-white/10 hover:border-brand-500/50">
+            <div>
+              <!-- Icon Container -->
+              <div class="w-14 h-14 rounded-2xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-6 group-hover:scale-110 group-hover:bg-brand-500/20 group-hover:text-brand-300 transition-all duration-300">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+
+              <!-- Title -->
+              <h3 class="font-display font-bold text-2xl text-white mb-3 group-hover:text-brand-300 transition-colors">
+                Web Development
+              </h3>
+
+              <!-- Description -->
+              <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                Engineered for speed, security, and effortless scalability. We build high-performance web applications, Jamstack architectures, and responsive digital platforms using modern frameworks.
+              </p>
+
+              <!-- Service Feature Checklist -->
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li class="flex items-center gap-2.5">
+                  <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>
+                  <span>Modern React, Next.js & TypeScript</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>
+                  <span>Sub-second load times & 99+ Lighthouse</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>
+                  <span>Robust API integration & Headless CMS</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tags & Card CTA -->
+            <div class="pt-6 border-t border-white/10 flex items-center justify-between">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] font-mono text-slate-400">Next.js</span>
+                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] font-mono text-slate-400">Tailwind</span>
+                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] font-mono text-slate-400">Node</span>
+              </div>
+              <a href="#contact" class="text-brand-400 group-hover:text-brand-300 text-xs font-semibold inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Inquire &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: UI/UX Design -->
+          <div class="glass-card glow-card rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between group border border-white/10 hover:border-brand-violet/50">
+            <div>
+              <!-- Icon Container -->
+              <div class="w-14 h-14 rounded-2xl bg-brand-violet/10 border border-brand-violet/20 flex items-center justify-center text-brand-violet mb-6 group-hover:scale-110 group-hover:bg-brand-violet/20 group-hover:text-brand-violet transition-all duration-300">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                </svg>
+              </div>
+
+              <!-- Title -->
+              <h3 class="font-display font-bold text-2xl text-white mb-3 group-hover:text-brand-violet transition-colors">
+                UI/UX Design
+              </h3>
+
+              <!-- Description -->
+              <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                Intuitive, human-centered interfaces that captivate users and turn visitors into devoted advocates. We deliver end-to-end design from user research to production Figma design systems.
+              </p>
+
+              <!-- Service Feature Checklist -->
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li class="flex items-center gap-2.5">
+                  <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>
+                  <span>User Journey Mapping & Wireframing</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>
+                  <span>Comprehensive Figma Design Systems</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>
+                  <span>Interactive High-Fidelity Prototyping</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tags & Card CTA -->
+            <div class="pt-6 border-t border-white/10 flex items-center justify-between">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] font-mono text-slate-400">Figma</span>
+                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] font-mono text-slate-400">Tokens</span>
+                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] font-mono text-slate-400">UX Audit</span>
+              </div>
+              <a href="#contact" class="text-brand-violet group-hover:text-purple-300 text-xs font-semibold inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Inquire &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: Brand Strategy -->
+          <div class="glass-card glow-card rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between group border border-white/10 hover:border-brand-cyan/50">
+            <div>
+              <!-- Icon Container -->
+              <div class="w-14 h-14 rounded-2xl bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center text-brand-cyan mb-6 group-hover:scale-110 group-hover:bg-brand-cyan/20 group-hover:text-brand-cyan transition-all duration-300">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+
+              <!-- Title -->
+              <h3 class="font-display font-bold text-2xl text-white mb-3 group-hover:text-brand-cyan transition-colors">
+                Brand Strategy
+              </h3>
+
+              <!-- Description -->
+              <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                Distinctive brand identities that command attention. We clarify your core value proposition, architect cohesive brand narrative, and craft iconic visual identities built for longevity.
+              </p>
+
+              <!-- Service Feature Checklist -->
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8">
+                <li class="flex items-center gap-2.5">
+                  <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>
+                  <span>Brand Architecture & Strategic Positioning</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>
+                  <span>Visual Identity & Typography Hierarchy</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>
+                  <span>Multi-channel Digital Brand Guidelines</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tags & Card CTA -->
+            <div class="pt-6 border-t border-white/10 flex items-center justify-between">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] font-mono text-slate-400">Identity</span>
+                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] font-mono text-slate-400">Positioning</span>
+                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] font-mono text-slate-400">Motion</span>
+              </div>
+              <a href="#contact" class="text-brand-cyan group-hover:text-cyan-300 text-xs font-semibold inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Inquire &rarr;
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Studio Capabilities Banner -->
+        <div class="mt-16 glass-card rounded-2xl p-6 sm:p-8 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-1 text-center md:text-left">
+            <h4 class="font-display font-bold text-lg text-white">Have a unique multidisciplinary challenge?</h4>
+            <p class="text-sm text-slate-300">We offer custom full-lifecycle partnerships from zero-to-one product incubation to global design rebrands.</p>
+          </div>
+          <a href="#contact" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm whitespace-nowrap transition-colors">
+            Custom Scope Consultation &rarr;
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==================== 3. FEATURED WORK / PORTFOLIO ==================== -->
+    <section id="work" class="py-20 md:py-28 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan text-xs font-semibold uppercase tracking-wider mb-4">
+              Featured Case Studies
+            </div>
+            <h2 class="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight">
+              Selected <span class="gradient-text">Portfolio Work</span>
+            </h2>
+          </div>
+          
+          <!-- Category Filter Pills -->
+          <div class="flex flex-wrap items-center gap-2 mt-6 md:mt-0" id="portfolio-filters">
+            <button type="button" data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-brand-500 text-white shadow-md shadow-brand-500/20 transition-all">All Projects</button>
+            <button type="button" data-filter="web" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-slate-300 transition-all">Web Dev</button>
+            <button type="button" data-filter="design" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-slate-300 transition-all">UI/UX Design</button>
+            <button type="button" data-filter="branding" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-slate-300 transition-all">Branding</button>
+          </div>
+        </div>
+
+        <!-- Portfolio Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+          
+          <!-- Project 1 -->
+          <div class="portfolio-item group glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-500/40 transition-all duration-300" data-category="web">
+            <div class="h-56 bg-gradient-to-br from-indigo-950 via-slate-900 to-brand-900 relative p-6 flex flex-col justify-between overflow-hidden">
+              <div class="absolute inset-0 bg-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="flex justify-between items-start z-10">
+                <span class="px-2.5 py-1 rounded-full bg-black/50 text-[11px] font-medium text-brand-300 backdrop-blur-sm border border-white/10">Next.js Web App</span>
+                <span class="text-xs text-slate-400 font-mono">2026</span>
+              </div>
+              <div class="z-10">
+                <div class="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white mb-2 group-hover:scale-110 transition-transform">
+                  <span class="font-display font-bold text-lg">AI</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="text-xs font-mono text-brand-cyan mb-1">Aura Intelligence</div>
+              <h3 class="font-display font-bold text-xl text-white mb-2 group-hover:text-brand-300 transition-colors">Generative Design Studio</h3>
+              <p class="text-slate-300 text-xs leading-relaxed mb-4">Real-time collaborative canvas powered by AI, delivering sub-50ms latency for over 250k monthly active designers.</p>
+              <div class="flex items-center justify-between text-xs pt-3 border-t border-white/5">
+                <span class="text-slate-400">+310% Conversion Lift</span>
+                <span class="text-brand-400 font-medium group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Case Study &rarr;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="portfolio-item group glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-violet/40 transition-all duration-300" data-category="design">
+            <div class="h-56 bg-gradient-to-br from-purple-950 via-slate-900 to-brand-violet/30 relative p-6 flex flex-col justify-between overflow-hidden">
+              <div class="absolute inset-0 bg-brand-violet/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="flex justify-between items-start z-10">
+                <span class="px-2.5 py-1 rounded-full bg-black/50 text-[11px] font-medium text-purple-300 backdrop-blur-sm border border-white/10">Fintech UI/UX</span>
+                <span class="text-xs text-slate-400 font-mono">2025</span>
+              </div>
+              <div class="z-10">
+                <div class="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white mb-2 group-hover:scale-110 transition-transform">
+                  <span class="font-display font-bold text-lg">CP</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="text-xs font-mono text-brand-violet mb-1">Chronos Protocol</div>
+              <h3 class="font-display font-bold text-xl text-white mb-2 group-hover:text-purple-300 transition-colors">Institutional Asset Terminal</h3>
+              <p class="text-slate-300 text-xs leading-relaxed mb-4">Complete overhaul of high-frequency liquidity trading interface with dense data visualization and custom dark system.</p>
+              <div class="flex items-center justify-between text-xs pt-3 border-t border-white/5">
+                <span class="text-slate-400">$1.2B Volume Processed</span>
+                <span class="text-brand-violet font-medium group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Case Study &rarr;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="portfolio-item group glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-brand-cyan/40 transition-all duration-300" data-category="branding">
+            <div class="h-56 bg-gradient-to-br from-cyan-950 via-slate-900 to-teal-900/40 relative p-6 flex flex-col justify-between overflow-hidden">
+              <div class="absolute inset-0 bg-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="flex justify-between items-start z-10">
+                <span class="px-2.5 py-1 rounded-full bg-black/50 text-[11px] font-medium text-cyan-300 backdrop-blur-sm border border-white/10">Brand Identity</span>
+                <span class="text-xs text-slate-400 font-mono">2025</span>
+              </div>
+              <div class="z-10">
+                <div class="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white mb-2 group-hover:scale-110 transition-transform">
+                  <span class="font-display font-bold text-lg">SG</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="text-xs font-mono text-brand-cyan mb-1">Solstice Goods</div>
+              <h3 class="font-display font-bold text-xl text-white mb-2 group-hover:text-cyan-300 transition-colors">Sustainable Luxury Rebrand</h3>
+              <p class="text-slate-300 text-xs leading-relaxed mb-4">Comprehensive brand architecture, typography guidelines, and flagship 3D e-commerce experience.</p>
+              <div class="flex items-center justify-between text-xs pt-3 border-t border-white/5">
+                <span class="text-slate-400">Awarded Site of the Day</span>
+                <span class="text-brand-cyan font-medium group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Case Study &rarr;</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==================== 4. HOW WE WORK / PROCESS ==================== -->
+    <section id="process" class="py-20 md:py-28 relative border-t border-white/10 bg-slate-950/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-violet/10 border border-brand-violet/20 text-brand-violet text-xs font-semibold uppercase tracking-wider mb-4">
+            Our Proven Methodology
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight mb-4">
+            From Blueprint to <span class="gradient-text">Flawless Launch</span>
+          </h2>
+          <p class="text-base sm:text-lg text-slate-300">
+            A transparent, sprint-driven workflow designed to deliver rapid iterations without compromising craftsmanship.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <!-- Step 1 -->
+          <div class="glass-card rounded-2xl p-6 border border-white/10 relative">
+            <span class="text-4xl font-display font-black text-brand-500/30">01</span>
+            <h3 class="font-display font-bold text-lg text-white mt-2 mb-2">Discovery</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">Deep analysis into your user personas, tech stack requirements, and brand market positioning.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="glass-card rounded-2xl p-6 border border-white/10 relative">
+            <span class="text-4xl font-display font-black text-brand-cyan/30">02</span>
+            <h3 class="font-display font-bold text-lg text-white mt-2 mb-2">Design & Prototype</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">Interactive wireframes and high-fidelity Figma components reviewed with your stakeholders weekly.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="glass-card rounded-2xl p-6 border border-white/10 relative">
+            <span class="text-4xl font-display font-black text-brand-violet/30">03</span>
+            <h3 class="font-display font-bold text-lg text-white mt-2 mb-2">Modern Engineering</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">Clean, typed, modular code built for 99+ Lighthouse performance and frictionless accessibility.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="glass-card rounded-2xl p-6 border border-white/10 relative">
+            <span class="text-4xl font-display font-black text-emerald-500/30">04</span>
+            <h3 class="font-display font-bold text-lg text-white mt-2 mb-2">Launch & Scale</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">Full CI/CD pipeline rollout, analytics integration, and comprehensive design token handoff.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==================== 5. INTERACTIVE CONTACT FORM ==================== -->
+    <section id="contact" class="py-20 md:py-32 relative border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          <!-- Contact Info Column -->
+          <div class="lg:col-span-5 space-y-8">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold uppercase tracking-wider mb-4">
+                Let's Build Together
+              </div>
+              <h2 class="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight mb-4">
+                Start a <span class="gradient-text">Conversation</span>
+              </h2>
+              <p class="text-base text-slate-300 leading-relaxed">
+                Have a new digital project in mind or looking to revitalize your product? Fill out the brief inquiry form and our studio directors will reply within 24 hours.
+              </p>
+            </div>
+
+            <!-- Studio Coordinates -->
+            <div class="space-y-4 pt-4 border-t border-white/10">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-400">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400">Direct Inquiries</div>
+                  <a href="mailto:hello@pixelcraft.studio" class="text-sm font-semibold text-white hover:text-brand-300 transition-colors">hello@pixelcraft.studio</a>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-cyan">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400">HQ Studio</div>
+                  <div class="text-sm font-semibold text-white">San Francisco, CA &amp; Remote Global</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400">Response SLA</div>
+                  <div class="text-sm font-semibold text-white">Guaranteed within 24 business hours</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Direct Booking Badge -->
+            <div class="p-4 rounded-xl bg-gradient-to-r from-brand-600/15 via-brand-cyan/10 to-transparent border border-white/10">
+              <div class="text-xs font-semibold text-white">Need an urgent project estimate?</div>
+              <div class="text-xs text-slate-300 mt-1">Our leads team handles quick turnaround sprints. Mention your target deadline in the message!</div>
+            </div>
+
+          </div>
+
+          <!-- Interactive Contact Form Card -->
+          <div class="lg:col-span-7">
+            <div class="glass-card rounded-2xl p-6 sm:p-10 border border-white/15 shadow-2xl relative">
+              
+              <h3 class="font-display font-bold text-2xl text-white mb-2">Send Us a Message</h3>
+              <p class="text-xs sm:text-sm text-slate-400 mb-6">Tell us about your project, timeline, and vision.</p>
+
+              <form id="contact-form" novalidate class="space-y-5">
+                
+                <!-- Name Field -->
+                <div>
+                  <label for="contact-name" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                    Your Name <span class="text-rose-400">*</span>
+                  </label>
+                  <div class="relative">
+                    <input 
+                      type="text" 
+                      id="contact-name" 
+                      name="name" 
+                      placeholder="e.g. Sarah Connor" 
+                      required
+                      class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all"
+                    >
+                    <span id="name-error" class="hidden text-rose-400 text-xs mt-1 block">Please enter your name.</span>
+                  </div>
+                </div>
+
+                <!-- Email Field -->
+                <div>
+                  <label for="contact-email" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                    Email Address <span class="text-rose-400">*</span>
+                  </label>
+                  <div class="relative">
+                    <input 
+                      type="email" 
+                      id="contact-email" 
+                      name="email" 
+                      placeholder="e.g. sarah@company.com" 
+                      required
+                      class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all"
+                    >
+                    <span id="email-error" class="hidden text-rose-400 text-xs mt-1 block">Please enter a valid email address.</span>
+                  </div>
+                </div>
+
+                <!-- Core Service Choice Selection -->
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-2">
+                    Primary Service of Interest
+                  </label>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="service-options">
+                    <label class="service-pill cursor-pointer">
+                      <input type="radio" name="service" value="Web Development" checked class="sr-only peer">
+                      <div class="p-3 rounded-xl border border-white/10 bg-slate-900/60 peer-checked:bg-brand-500/20 peer-checked:border-brand-500 text-center text-xs font-medium text-slate-300 peer-checked:text-white transition-all hover:bg-white/5">
+                        Web Dev
+                      </div>
+                    </label>
+                    <label class="service-pill cursor-pointer">
+                      <input type="radio" name="service" value="UI/UX Design" class="sr-only peer">
+                      <div class="p-3 rounded-xl border border-white/10 bg-slate-900/60 peer-checked:bg-brand-violet/20 peer-checked:border-brand-violet text-center text-xs font-medium text-slate-300 peer-checked:text-white transition-all hover:bg-white/5">
+                        UI/UX Design
+                      </div>
+                    </label>
+                    <label class="service-pill cursor-pointer">
+                      <input type="radio" name="service" value="Brand Strategy" class="sr-only peer">
+                      <div class="p-3 rounded-xl border border-white/10 bg-slate-900/60 peer-checked:bg-brand-cyan/20 peer-checked:border-brand-cyan text-center text-xs font-medium text-slate-300 peer-checked:text-white transition-all hover:bg-white/5">
+                        Brand Strategy
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Message Field -->
+                <div>
+                  <label for="contact-message" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                    Project Message <span class="text-rose-400">*</span>
+                  </label>
+                  <div class="relative">
+                    <textarea 
+                      id="contact-message" 
+                      name="message" 
+                      rows="4" 
+                      placeholder="Briefly describe your goals, timeline, and any specific design or technical requirements..." 
+                      required
+                      class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all resize-none"
+                    ></textarea>
+                    <span id="message-error" class="hidden text-rose-400 text-xs mt-1 block">Please enter your message (at least 10 characters).</span>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                  type="submit" 
+                  id="submit-btn" 
+                  class="w-full py-4 px-6 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-brand-600 via-brand-500 to-brand-cyan hover:opacity-95 shadow-xl shadow-brand-500/30 transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-400 flex items-center justify-center gap-2"
+                >
+                  <span id="btn-text">Send Message</span>
+                  <svg id="btn-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                  </svg>
+                  <svg id="btn-spinner" class="hidden w-4 h-4 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </button>
+
+                <p class="text-[11px] text-center text-slate-400 mt-3">
+                  We respect your privacy. No spam, ever. NDAs available upon request.
+                </p>
+
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/10 bg-[#060910] relative z-10 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/10">
+        
+        <!-- Logo & Tagline -->
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl gradient-accent flex items-center justify-center text-white">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path>
+            </svg>
+          </div>
+          <div>
+            <span class="font-display font-bold text-lg text-white">PixelCraft Studio</span>
+            <span class="text-xs text-slate-400 block">We Build Digital Experiences</span>
+          </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="flex items-center space-x-4">
+          <a href="#" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors" aria-label="Twitter">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors" aria-label="GitHub">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+        <div>
+          &copy; <span id="current-year"></span> PixelCraft Studio LLC. All rights reserved.
+        </div>
+        <div class="flex items-center space-x-6">
+          <a href="#services" class="hover:text-slate-300 transition-colors">Services</a>
+          <a href="#work" class="hover:text-slate-300 transition-colors">Projects</a>
+          <a href="#contact" class="hover:text-slate-300 transition-colors">Contact</a>
+          <button id="back-to-top" type="button" class="text-brand-400 hover:text-brand-300 flex items-center gap-1">
+            Back to top &uarr;
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== INTERACTIVE TOAST NOTIFICATION ==================== -->
+  <div 
+    id="toast-notification" 
+    role="alert" 
+    aria-live="assertive" 
+    class="fixed top-6 right-6 z-50 transform -translate-y-10 opacity-0 pointer-events-none transition-all duration-300 max-w-md w-full sm:w-auto"
+  >
+    <div class="glass-card rounded-2xl p-4 sm:p-5 border border-emerald-500/40 bg-slate-900/95 shadow-2xl shadow-emerald-950/50 flex items-start gap-4">
+      
+      <!-- Success Icon -->
+      <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex-shrink-0 flex items-center justify-center text-emerald-400">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+
+      <!-- Toast Content -->
+      <div class="flex-grow pr-2">
+        <h4 class="font-display font-bold text-sm text-white flex items-center gap-2">
+          Message Sent Successfully!
+          <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-ping"></span>
+        </h4>
+        <p id="toast-message" class="text-xs text-slate-300 mt-1">
+          Thank you for reaching out! Our team has received your message and will review it shortly.
+        </p>
+      </div>
+
+      <!-- Dismiss Button -->
+      <button 
+        id="toast-close-btn" 
+        type="button" 
+        aria-label="Close Notification"
+        class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- ==================== VANILLA JAVASCRIPT ==================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Set current year in footer
+      const yearEl = document.getElementById('current-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // 2. Mobile Navigation Toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const hamburgerIcon = document.getElementById('hamburger-icon');
+      const closeIcon = document.getElementById('close-icon');
+
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+          mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+          mobileMenu.classList.toggle('hidden');
+          hamburgerIcon.classList.toggle('hidden');
+          closeIcon.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on clicking any navigation link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            hamburgerIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // 3. Portfolio Category Filtering
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+
+          // Update active button styling
+          filterBtns.forEach(b => {
+            b.classList.remove('bg-brand-500', 'text-white', 'shadow-md', 'shadow-brand-500/20');
+            b.classList.add('bg-white/5', 'text-slate-300');
+          });
+          btn.classList.remove('bg-white/5', 'text-slate-300');
+          btn.classList.add('bg-brand-500', 'text-white', 'shadow-md', 'shadow-brand-500/20');
+
+          // Filter cards
+          portfolioItems.forEach(item => {
+            const category = item.getAttribute('data-category');
+            if (filter === 'all' || category === filter) {
+              item.style.display = 'block';
+              item.classList.add('animate-fade-in');
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // 4. Back To Top
+      const backToTopBtn = document.getElementById('back-to-top');
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // 5. Toast Notification System
+      const toast = document.getElementById('toast-notification');
+      const toastMessageEl = document.getElementById('toast-message');
+      const toastCloseBtn = document.getElementById('toast-close-btn');
+      let toastTimeout = null;
+
+      function showToast(name, service) {
+        if (!toast) return;
+
+        // Custom personalized message
+        if (toastMessageEl) {
+          const greetingName = name ? name.trim().split(' ')[0] : 'there';
+          const serviceText = service ? ` regarding ${service}` : '';
+          toastMessageEl.textContent = `Thanks, ${greetingName}! We've received your request${serviceText} and will reach out within 24 hours.`;
+        }
+
+        // Clear any previous timeout
+        if (toastTimeout) clearTimeout(toastTimeout);
+
+        // Make visible and trigger animation
+        toast.classList.remove('-translate-y-10', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+
+        // Auto dismiss after 4.5 seconds
+        toastTimeout = setTimeout(() => {
+          hideToast();
+        }, 4500);
+      }
+
+      function hideToast() {
+        if (!toast) return;
+        toast.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+        toast.classList.add('-translate-y-10', 'opacity-0', 'pointer-events-none');
+      }
+
+      if (toastCloseBtn) {
+        toastCloseBtn.addEventListener('click', hideToast);
+      }
+
+      // 6. Contact Form Submission & Validation
+      const contactForm = document.getElementById('contact-form');
+      const nameInput = document.getElementById('contact-name');
+      const emailInput = document.getElementById('contact-email');
+      const messageInput = document.getElementById('contact-message');
+      const nameError = document.getElementById('name-error');
+      const emailError = document.getElementById('email-error');
+      const messageError = document.getElementById('message-error');
+      const submitBtn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      const btnIcon = document.getElementById('btn-icon');
+      const btnSpinner = document.getElementById('btn-spinner');
+
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function clearValidation() {
+        if (nameError) nameError.classList.add('hidden');
+        if (emailError) emailError.classList.add('hidden');
+        if (messageError) messageError.classList.add('hidden');
+        nameInput.classList.remove('border-rose-500');
+        emailInput.classList.remove('border-rose-500');
+        messageInput.classList.remove('border-rose-500');
+      }
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          clearValidation();
+
+          let isValid = true;
+          const nameVal = nameInput.value.trim();
+          const emailVal = emailInput.value.trim();
+          const messageVal = messageInput.value.trim();
+          const selectedService = document.querySelector('input[name="service"]:checked')?.value || 'Digital Services';
+
+          // Validate Name
+          if (!nameVal) {
+            isValid = false;
+            if (nameError) nameError.classList.remove('hidden');
+            nameInput.classList.add('border-rose-500');
+          }
+
+          // Validate Email
+          if (!emailVal || !validateEmail(emailVal)) {
+            isValid = false;
+            if (emailError) emailError.classList.remove('hidden');
+            emailInput.classList.add('border-rose-500');
+          }
+
+          // Validate Message
+          if (!messageVal || messageVal.length < 5) {
+            isValid = false;
+            if (messageError) messageError.classList.remove('hidden');
+            messageInput.classList.add('border-rose-500');
+          }
+
+          if (!isValid) return;
+
+          // Interactive Loading State
+          submitBtn.disabled = true;
+          btnText.textContent = 'Sending Message...';
+          btnIcon.classList.add('hidden');
+          btnSpinner.classList.remove('hidden');
+
+          // Simulate network submission delay (600ms)
+          setTimeout(() => {
+            // Restore button
+            submitBtn.disabled = false;
+            btnText.textContent = 'Send Message';
+            btnIcon.classList.remove('hidden');
+            btnSpinner.classList.add('hidden');
+
+            // Trigger success toast
+            showToast(nameVal, selectedService);
+
+            // Reset form
+            contactForm.reset();
+          }, 600);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
